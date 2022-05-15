@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js"></script>
+    <title>Caviste</title>
+</head>
+<body>
+    <header>
+        <div id="logo">
+            <img src="img/logo_caviste.png" alt="une coupe dorée">
+        </div>
+        
+        <h1 id="titre">Caviste</h1>
+
+        <nav>
+            <a href="about.html" id="about">About</a>
+            <a href="index.html" id="home">Home</a>   
+        </nav>
+
+        <form action="#" method="get" id="filtre">
+            <div class="form">
+                <label for="searchBar">Search :</label>
+                <input type="text" id="searchBar" placeholder="Make a research here..." value="">
+                <button type="button" id="btnSearch">Search</button>
+            </div>
+
+            <button id="filter" type="submit">Filter</button>
+        </form>
+
+        <select name="pays" id="pays">
+            <option value="All countries">All countries</option>
+            <option value="Argentina">Argentina</option>
+            <option value="Spain">Spain</option>
+            <option value="United States">United States</option>
+            <option value="France">France</option>
+            <option value="Italy">Italy</option>
+        </select>
+
+        <select name="années" id="annees">
+            <option value="All years">All years</option>
+            <option value="2005">2005</option>
+            <option value="2006">2006</option>
+            <option value="2007">2007</option>
+            <option value="2009">2009</option>
+            <option value="2010">2010</option>
+            <option value="2011">2011</option>
+        </select>
+
+    </header>
+    
+
+<main>
+
+    <aside>
+        <ul id="liste">
+        </ul>
+    </aside>
+
+
+    <div id="bottle">
+        <img src="" alt="bottle of wine"> 
+    </div>
+
+    <article class="descWines">
+        <h3 id="nameWine">Vin</h3>
+        <ul>
+            <li id="grape"></li>
+            <li id="country"></li>
+            <li id="region"></li>
+            <li id="year"></li>
+            <li id="capacité"></li>
+            <li id="color"></li>
+            <li id="price"></li>
+        </ul>
+
+        <form action="#" onclick="">
+            <button type="image" id="image" alt= "Add a picture">📷 Add a picture</button>
+            <button type="image" id="note" alt= "Add a note">✎ Add a note</button>
+            <button type="image" id="like" alt= "Like this wine">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
+       
+        <div>
+            <p class="menu"><a href="">Description</a></p>
+            <p class="menu"><a href="">Comments</a></p>
+            <p class="menu"><a href="">Personal notes</a></p>
+        </div>
+        </form>
+    </article>
+
+</main>
+
+</body>
+</html>
