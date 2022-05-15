@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="style.css">
     <script src="app.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <title>Caviste</title>
 </head>
 <body>
@@ -11,24 +14,19 @@
         <div id="logo">
             <img src="img/logo_caviste.png" alt="une coupe dorée">
         </div>
-        
         <h1 id="titre">Caviste</h1>
-
         <nav>
             <a href="about.html" id="about">About</a>
             <a href="index.html" id="home">Home</a>   
         </nav>
-
         <form action="#" method="get" id="filtre">
             <div class="form">
                 <label for="searchBar">Search :</label>
                 <input type="text" id="searchBar" placeholder="Make a research here..." value="">
                 <button type="button" id="btnSearch">Search</button>
             </div>
-
             <button id="filter" type="submit">Filter</button>
         </form>
-
         <select name="pays" id="pays">
             <option value="All countries">All countries</option>
             <option value="Argentina">Argentina</option>
@@ -37,7 +35,6 @@
             <option value="France">France</option>
             <option value="Italy">Italy</option>
         </select>
-
         <select name="années" id="annees">
             <option value="All years">All years</option>
             <option value="2005">2005</option>
@@ -47,24 +44,17 @@
             <option value="2010">2010</option>
             <option value="2011">2011</option>
         </select>
-
     </header>
-    
-
 <main>
-
     <aside>
         <ul id="liste">
         </ul>
     </aside>
-
-
     <div id="bottle">
-        <img src="" alt="bottle of wine"> 
+        <img src="img/bartender.png" alt="bottle of wine" width="180px"> 
     </div>
-
     <article class="descWines">
-        <h3 id="nameWine">Vin</h3>
+            <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
         <ul>
             <li id="grape"></li>
             <li id="country"></li>
@@ -74,20 +64,27 @@
             <li id="color"></li>
             <li id="price"></li>
         </ul>
-
         <form action="#" onclick="">
-            <button type="image" id="image" alt= "Add a picture">📷 Add a picture</button>
-            <button type="image" id="note" alt= "Add a note">✎ Add a note</button>
-            <button type="image" id="like" alt= "Like this wine">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
-       
-        <div>
-            <p class="menu"><a href="">Description</a></p>
-            <p class="menu"><a href="">Comments</a></p>
-            <p class="menu"><a href="">Personal notes</a></p>
-        </div>
+            <button type="button" id="image">📷 Add a picture</button>
+            <button type="button" id="note">✎ Add a note</button>
+            <button type="button" id="like"class="btn btn-danger">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
         </form>
-    </article>
-
+        <div id="infoSupp">
+            <nav>
+                <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                  <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
+                  <button class="nav-link" id="nav-comments-tab" data-bs-toggle="tab" data-bs-target="#nav-comments" type="button" role="tab" aria-controls="nav-comments" aria-selected="false">Comments</button>
+                  <button class="nav-link" id="nav-notes-tab" data-bs-toggle="tab" data-bs-target="#nav-notes" type="button" role="tab" aria-controls="nav-notes" aria-selected="false">personal notes</button>
+                </div>
+            </nav>
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">Any informations...</div>
+                <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">Any informations...</div>
+                <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">Any informations...</div>
+              </div>
+            </div> 
+        </div>     
+    </article>  
 </main>
 <footer>EPFC 2021-2022</footer>
 </body>
