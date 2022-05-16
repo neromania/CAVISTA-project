@@ -1,4 +1,5 @@
 "# CAVISTA-project" 
+
 --- FR ---
 Réalisation d'une Single Page Application (SPA) en HTML5, CSS3 et JavaScript. L'enjeu de ce projet consiste à exploiter les spécificités avancées du langage JavaScript afin de gérer les interactions avec l’utilisateur et de communiquer avec une API Restful pour l’accès aux données.
 
