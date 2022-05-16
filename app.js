@@ -33,7 +33,7 @@ function getComments(wineId){
         const doc = this.responseText;
         const data = JSON.parse(doc);
         for(let i = 0; i < data.length; i++){
-            comments.innerHTML += '<p>user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>';
+            comments.innerHTML += '<p>user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>'; 
         }
     };
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
@@ -82,7 +82,13 @@ xhr.onload = function (){
                             //console.log(wine.name);
                             getTotalLike(wine.id);
                             descriptionBottle(wine);
-                            getComments(wine.id);
+                            //Error with the API with thoses ids => no comments ;
+                            if (wine.name == 'LAN Xtreme Biologico, Rioja Crianza'|| wine.name == 'Owen Roe "Ex Umbris"'  ) {
+                                const error = document.getElementById("nav-comments");
+                                error.innerHTML = '<p>No informations yet...</p>' ;   
+                            } else {
+                                getComments(wine.id);
+                            }
                         }
                     }
                 }
@@ -105,7 +111,14 @@ xhr.onload = function (){
                                 if (wine.name.indexOf(this.innerHTML) != -1) {
                                     descriptionBottle(wine);    
                                     getTotalLike(wine.id);        
-                                    getComments(wine.id);                        
+                                    //Error with the API with thoses ids => no comments ;
+                                    if (wine.name == 'LAN Xtreme Biologico, Rioja Crianza'|| wine.name == 'Owen Roe "Ex Umbris"'  ) {
+                                        const error = document.getElementById("nav-comments");
+                                        error.innerHTML = '<p>No informations yet...</p>' ; 
+                                    } else {
+                                        getComments(wine.id);
+                                    }
+                                                            
                                 }
                             }
                             }
