@@ -11,39 +11,39 @@
 </head>
 <body>
     <header>
-        <div id="logo">
-            <img src="img/logo_caviste.png" alt="une coupe dorée">
-        </div>
-        <h1 id="titre">Caviste</h1>
         <nav>
             <a href="about.html" id="about">About</a>
             <a href="index.html" id="home">Home</a>   
         </nav>
+        <div id="logo">
+            <a href="index.html"><img src="img/logo_caviste.png" alt="une coupe dorée"></a>
+        </div>
+        <h1 id="titre">Caviste</h1>
         <form action="#" method="get" id="filtre">
             <div class="form">
                 <label for="searchBar">Search :</label>
                 <input type="text" id="searchBar" placeholder="Make a research here..." value="">
                 <button type="button" id="btnSearch">Search</button>
+                <button id="filter" type="submit">Filter</button>
+                <select name="pays" id="pays">
+                    <option value="All countries">All countries</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Spain">Spain</option>
+                    <option value="United States">United States</option>
+                    <option value="France">France</option>
+                    <option value="Italy">Italy</option>
+                </select>
+                <select name="années" id="annees">
+                    <option value="All years">All years</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                </select>
             </div>
-            <button id="filter" type="submit">Filter</button>
         </form>
-        <select name="pays" id="pays">
-            <option value="All countries">All countries</option>
-            <option value="Argentina">Argentina</option>
-            <option value="Spain">Spain</option>
-            <option value="United States">United States</option>
-            <option value="France">France</option>
-            <option value="Italy">Italy</option>
-        </select>
-        <select name="années" id="annees">
-            <option value="All years">All years</option>
-            <option value="2005">2005</option>
-            <option value="2006">2006</option>
-            <option value="2007">2007</option>
-            <option value="2009">2009</option>
-            <option value="2010">2010</option>
-            <option value="2011">2011</option>
-        </select>
     </header>
 <main>
     <aside>

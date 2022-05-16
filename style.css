@@ -89,3 +89,9 @@ aside {
     background-color: #0d6efd;
     color: aliceblue;
 }
+header{
+    margin: auto;
+    display: inline;
+    text-align: left;
+    width: 150px;
+}
