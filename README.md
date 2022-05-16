@@ -24,7 +24,7 @@ Constraints:
 
 Composition of the group:
 - Ismail T.
--Serge B.
+- Serge B.
 - Ismail D.
 - Nassim J.
 
