@@ -15,13 +15,13 @@ function descriptionBottle(element) {
         imgBottle.src = 'https://cruth.phpnet.org/epfc/caviste/public/pics/'+element.picture;
         hashtagId.innerHTML = '#'+element.id;
         nameTitle.innerHTML = element.name;
-        grape.innerHTML = 'Grapes : </em>'+element.grapes+'</em>';
-        country.innerHTML = 'Country: <em>'+element.country+'</em>';
-        region.innerHTML = 'Region: <em>'+element.region+'</em>';
-        year.innerHTML = 'Year: <em>'+element.year+'</em>';
-        capacity.innerHTML = 'Capacity: <em>'+element.capacity+'</em>';
-        color.innerHTML = 'Color: <em>'+element.color+'</em>';
-        price.innerHTML = 'Price: <em>'+element.price +' €</em>';
+        grape.innerHTML = '<strong>Grapes: </strong></em>'+element.grapes+'</em>';
+        country.innerHTML = '<strong>Country: </strong><em>'+element.country+'</em>';
+        region.innerHTML = '<strong>Region: </strong><em>'+element.region+'</em>';
+        year.innerHTML = '<strong>Year: </strong><em>'+element.year+'</em>';
+        capacity.innerHTML = '<strong>Capacity: </strong><em>'+element.capacity+'</em>';
+        color.innerHTML = '<strong>Color: </strong><em>'+element.color+'</em>';
+        price.innerHTML = '<strong>Price: </strong><em>'+element.price +' €</em>';
         desc.innerHTML = element.description;
 }
 
