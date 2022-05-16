@@ -25,6 +25,25 @@ function descriptionBottle(element) {
         desc.innerHTML = element.description;
 }
 
+//Recuperation des données de connexions
+window.onload = function(){
+    let login = document.getElementById('login');
+    let pwd = document.getElementById('pwd');
+    let remember = document.getElementById('rmbr');
+    const btnSubmit = document.getElementById('btnSign');
+    btnSubmit.onclick = function(){
+        if (remember.checked) {
+            localStorage.setItem('credentials',btoa(login.value+':'+pwd.value)); 
+            let credentials = localStorage.getItem('credentials');
+            $('#exampleModal').stop().slideToggle('fast');
+            //$(".modal-open").removeClass("modal-open").addClass("modal-close");
+            $("body > div").removeClass();
+        }
+    }
+    
+}
+
+
 function getComments(wineId){
     const comments = document.getElementById("nav-comments");
     comments.innerHTML = "";

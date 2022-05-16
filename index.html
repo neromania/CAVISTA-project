@@ -11,9 +11,11 @@
 </head>
 <body>
     <header>
-        <nav>
+        <nav id="nav-bar">
+             <!-- Button trigger modal -->
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">LogIn</button>
             <a href="about.html" id="about">About</a>
-            <a href="index.html" id="home">Home</a>   
+            <a href="index.html" id="home">Home</a>     
         </nav>
         <div id="logo">
             <a href="index.html"><img src="img/logo_caviste.png" alt="une coupe dorée"></a>
@@ -42,6 +44,47 @@
                     <option value="2011">2011</option>
                 </select>
                 <button id="filter" type="submit">Filter</button>
+            </div>
+            <div>   
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                  <input type="text" id="login" class="form-control" >
+                                  <label class="form-label" for="login">Login</label>
+                                </div>
+                              
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                  <input type="password" id="pwd" class="form-control" >
+                                  <label class="form-label" for="pwd">Password</label>
+                                </div>
+                              
+                                <!-- 2 column grid layout for inline styling -->
+                                <div class="row mb-4">
+                                  <div class="col d-flex justify-content-center">
+                                    <!-- Checkbox -->
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="rmbr">
+                                      <label class="form-check-label" for="rmbr"> Remember me </label>
+                                    </div>
+                                  </div>
+                              
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnSign">SIGN IN</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div>
         </form>
     </header>
