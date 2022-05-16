@@ -12,6 +12,7 @@ function descriptionBottle(element) {
         const price = document.getElementById("price");
         const like = document.getElementById("like");
         const desc = document.getElementById("nav-description");
+        let myGraph = document.getElementById('myChart');
         imgBottle.src = 'https://cruth.phpnet.org/epfc/caviste/public/pics/'+element.picture;
         hashtagId.innerHTML = '#'+element.id;
         nameTitle.innerHTML = element.name;
@@ -23,24 +24,44 @@ function descriptionBottle(element) {
         color.innerHTML = '<strong>Color: </strong><em>'+element.color+'</em>';
         price.innerHTML = '<strong>Price: </strong><em>'+element.price +' €</em>';
         desc.innerHTML = element.description;
+        let tabCountrys = [];
+        let tabPrices = [];
+        let tabNames = [];
+        let tabCountryClean;
+        //Graphics tab
+        for(let i of list){
+            tabCountrys.push(i.country);
+            tabNames.push(i.name);
+            tabPrices.push(i.price);
+        }
+        tabCountryClean = [...new Set(tabCountrys)];
+            let barChart = new Chart(myGraph, {
+                type: "line",
+                data: {
+                labels: [element.country,tabCountryClean[1],tabCountryClean[2],tabCountryClean[3],tabCountryClean[4]],
+                    datasets: [{
+                        data: [element.price,tabPrices[1],tabPrices[2],tabPrices[3],tabPrices[4]]
+                    }]
+                }
+            })
+        
 }
-
-//Recuperation des données de connexions
+//Formulaire de connexions
 window.onload = function(){
+    //Recuperation des données de connexions
     let login = document.getElementById('login');
     let pwd = document.getElementById('pwd');
     let remember = document.getElementById('rmbr');
     const btnSubmit = document.getElementById('btnSign');
     btnSubmit.onclick = function(){
         if (remember.checked) {
+            //données sauvées dans le navigateur
             localStorage.setItem('credentials',btoa(login.value+':'+pwd.value)); 
             let credentials = localStorage.getItem('credentials');
-            $('#exampleModal').stop().slideToggle('fast');
-            //$(".modal-open").removeClass("modal-open").addClass("modal-close");
-            $("body > div").removeClass();
         }
+        $('#exampleModal').stop().slideToggle('fast');
+        $("body > div").removeClass();
     }
-    
 }
 
 

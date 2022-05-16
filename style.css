@@ -92,6 +92,9 @@ footer {
     position: relative;
     text-align: center;
 }
+#infoSupp{
+    width: 600px;
+}
 
 
 article.descWines {
