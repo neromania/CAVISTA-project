@@ -1,5 +1,6 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
+    height: 900px;
 }
 #logo {
     float : left;
@@ -22,29 +23,28 @@ body {
     list-style-type: none;
     margin-right : 40px;
 }
-.descWines li{
+.descWines li  {
     list-style-type: none;
+}
+a#about {
+    text-decoration: none;
+}
+a#home {
+    text-decoration: none;
 }
 #btnSearch {
     background-color:rgb(201,146,62);
     color: white;
     border: none;
 }
-
-#filtre #annees  {
-    margin-left: 16px;
+#nav-comments p{
+    margin-bottom: 0rem;
 }
-
 #frm {
     float: left;
 }
 #vins {
     list-style-type: none;
-}
-
-footer{
-    margin: auto;
-    text-align: center;
 }
 
 #liste li{
@@ -58,7 +58,8 @@ footer{
 }
 
 #liste {
-    margin-top: 80px;
+    margin-top: 30px;
+    height: 500px;
 }
 #liste li:hover {
     background-color : rgb(201,146,62);
@@ -69,6 +70,12 @@ footer{
     text-align: center;
     list-style: none;
 }
+footer {
+    clear: both;
+    position: relative;
+    text-align: center;
+}
+
 
 article.descWines {
 width: 400px;

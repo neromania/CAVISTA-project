@@ -24,7 +24,6 @@
                 <label for="searchBar">Search :</label>
                 <input type="text" id="searchBar" placeholder="Make a research here..." value="">
                 <button type="button" id="btnSearch">Search</button>
-                <button id="filter" type="submit">Filter</button>
                 <select name="pays" id="pays">
                     <option value="All countries">All countries</option>
                     <option value="Argentina">Argentina</option>
@@ -42,6 +41,7 @@
                     <option value="2010">2010</option>
                     <option value="2011">2011</option>
                 </select>
+                <button id="filter" type="submit">Filter</button>
             </div>
         </form>
     </header>
@@ -56,13 +56,13 @@
     <article class="descWines">
             <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
         <ul>
-            <li id="grape"></li>
-            <li id="country"></li>
-            <li id="region"></li>
-            <li id="year"></li>
-            <li id="capacité"></li>
-            <li id="color"></li>
-            <li id="price"></li>
+            <li id="grape">Grapes: </li>
+            <li id="country">Country:</li>
+            <li id="region">Region:</li>
+            <li id="year">Year: </li>
+            <li id="capacity">Capacity: </li>
+            <li id="color">Color: </li>
+            <li id="price">Price: </li>
         </ul>
         <form action="#" onclick="">
             <button type="button" id="image">📷 Add a picture</button>

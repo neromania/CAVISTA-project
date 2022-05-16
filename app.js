@@ -7,7 +7,7 @@ function descriptionBottle(element) {
         const country = document.getElementById("country");
         const region = document.getElementById("region");
         const year = document.getElementById("year");
-        const capacity = document.getElementById("capacité");
+        const capacity = document.getElementById("capacity");
         const color = document.getElementById("color");
         const price = document.getElementById("price");
         const like = document.getElementById("like");
@@ -15,13 +15,13 @@ function descriptionBottle(element) {
         imgBottle.src = 'https://cruth.phpnet.org/epfc/caviste/public/pics/'+element.picture;
         hashtagId.innerHTML = '#'+element.id;
         nameTitle.innerHTML = element.name;
-        grape.innerHTML = '<em>Grapes</em> : '+element.grapes;
-        country.innerHTML = '<em>Country</em> : '+element.country;
-        region.innerHTML = '<em>Region</em> : '+element.region;
-        year.innerHTML = '<em>Year</em> : '+element.year;
-        capacity.innerHTML = '<em>Capacity</em> : '+element.capacity;
-        color.innerHTML = '<em>Color</em> : '+element.color;
-        price.innerHTML = '<em>Price</em> : '+element.price+" €";
+        grape.innerHTML = 'Grapes : </em>'+element.grapes+'</em>';
+        country.innerHTML = 'Country: <em>'+element.country+'</em>';
+        region.innerHTML = 'Region: <em>'+element.region+'</em>';
+        year.innerHTML = 'Year: <em>'+element.year+'</em>';
+        capacity.innerHTML = 'Capacity: <em>'+element.capacity+'</em>';
+        color.innerHTML = 'Color: <em>'+element.color+'</em>';
+        price.innerHTML = 'Price: <em>'+element.price +' €</em>';
         desc.innerHTML = element.description;
 }
 
