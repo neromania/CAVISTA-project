@@ -22,31 +22,32 @@
             <a href="index.html"><img src="img/logo_caviste.png" alt="une coupe dorée"></a>
         </div>
         <h1 id="titre">Caviste</h1>
-        <form action="#" method="get" id="filtre">
-            <div class="form">
-                <label for="searchBar">Search :</label>
-                <input type="text" id="searchBar" placeholder="Make a research here..." value="">
-                <button type="button" id="btnSearch">Search</button>
-                <select name="pays" id="pays">
-                    <option value="All countries">All countries</option>
-                    <option value="Argentina">Argentina</option>
-                    <option value="Spain">Spain</option>
-                    <option value="United States">United States</option>
-                    <option value="France">France</option>
-                    <option value="Italy">Italy</option>
-                </select>
-                <select name="années" id="annees">
-                    <option value="All years">All years</option>
-                    <option value="2005">2005</option>
-                    <option value="2006">2006</option>
-                    <option value="2007">2007</option>
-                    <option value="2009">2009</option>
-                    <option value="2010">2010</option>
-                    <option value="2011">2011</option>
-                </select>
-                <button id="filter" type="submit">Filter</button>
-            </div>
-            <div>   
+            <div id="form1">  
+                <form action="#" method="get">
+                    <label for="searchBar">Search :</label>
+                    <input type="text" id="searchBar" placeholder="Make a research here..." value="">
+                    <button type="button" id="btnSearch">Search</button>
+                    <select name="pays" id="pays">
+                        <option value="All countries">All countries</option>
+                        <option value="Argentina">Argentina</option>
+                        <option value="Spain">Spain</option>
+                        <option value="United States">United States</option>
+                        <option value="France">France</option>
+                        <option value="Italy">Italy</option>
+                    </select>
+                    <select name="années" id="annees">
+                        <option value="All years">All years</option>
+                        <option value="2005">2005</option>
+                        <option value="2006">2006</option>
+                        <option value="2007">2007</option>
+                        <option value="2009">2009</option>
+                        <option value="2010">2010</option>
+                        <option value="2011">2011</option>
+                    </select>
+                    <button id="filter" type="submit">Filter</button>
+                </form>
+            </div> 
+            <div id="liste">
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
                     <div class="modal-dialog">
@@ -85,20 +86,16 @@
                     </div>
                     </div>
                 </div>
-            </div>
-        </form>
+            </div> 
     </header>
 <main>
-    <aside>
-        <ul id="liste">
-        </ul>
-    </aside>
     <div id="bottle">
-        <img src="img/bartender.png" alt="bottle of wine" width="180px"> 
+        <img src="img/bartender.png" alt="bottle of wine" width="260" height="295"> 
     </div>
     <article class="descWines">
-            <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
-        <ul>
+        <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
+        <div id="wineList">
+            <ul>
             <li id="grape"><strong>Grapes: </strong></li>
             <li id="country"><strong>Country: </strong></li>
             <li id="region"><strong>Region: </strong></li>
@@ -107,18 +104,21 @@
             <li id="color"><strong>Color: </strong></li>
             <li id="price"><strong>Price: </strong></li>
         </ul>
-        <form action="#" onclick="">
+        </div>
+        <div id="adds">
+             <form action="#" onclick="" id="form2">
             <button type="button" id="image">📷 Add a picture</button>
             <button type="button" id="note">✎ Add a note</button>
             <button type="button" id="like"class="btn btn-danger">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
         </form>
+        </div>
         <div id="infoSupp">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
                   <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
                   <button class="nav-link" id="nav-comments-tab" data-bs-toggle="tab" data-bs-target="#nav-comments" type="button" role="tab" aria-controls="nav-comments" aria-selected="false">Comments</button>
-                  <button class="nav-link" id="nav-notes-tab" data-bs-toggle="tab" data-bs-target="#nav-notes" type="button" role="tab" aria-controls="nav-notes" aria-selected="false">personal notes</button>
-                  <button class="nav-link" id="nav-graph-tab" data-bs-toggle="tab" data-bs-target="#nav-graph" type="button" role="tab" aria-controls="nav-graph" aria-selected="false">graphics</button>
+                  <button class="nav-link" id="nav-notes-tab" data-bs-toggle="tab" data-bs-target="#nav-notes" type="button" role="tab" aria-controls="nav-notes" aria-selected="false">Personal notes</button>
+                  <button class="nav-link" id="nav-graph-tab" data-bs-toggle="tab" data-bs-target="#nav-graph" type="button" role="tab" aria-controls="nav-graph" aria-selected="false">Graphics</button>
                 </div>
             </nav>
               <div class="tab-content" id="nav-tabContent">
@@ -131,6 +131,6 @@
         </div>     
     </article>  
 </main>
-<footer>EPFC 2021-2022</footer>
+<footer>&copy; EPFC 2021-2022</footer>
 </body>
 </html>

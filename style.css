@@ -1,6 +1,6 @@
 body {
+    width : 1350px;
     font-family: Arial, Helvetica, sans-serif;
-    height: 900px;
 }
 #logo {
     float : left;
@@ -8,7 +8,6 @@ body {
     margin-bottom: 60px;
 }
 header{
-    margin: auto;
     display: inline;
     text-align: left;
     width: 150px;
@@ -22,12 +21,13 @@ nav#nav-bar {
     width: 300px;
     float: right;
     justify-content: space-between;
+    margin-top: 20px;
 }
 
 #titre {
     color : rgb(201,146,62);
     font-size : 48px;
-    margin-top : 60px;
+    margin-top : 50px;
     margin-bottom: 0;
 }
 #home {
@@ -53,6 +53,8 @@ a#home {
     background-color:rgb(201,146,62);
     color: white;
     border: none;
+    margin-left: 2px;
+    margin-right: 20px;
 }
 #nav-comments p{
     margin-bottom: 0rem;
@@ -73,14 +75,16 @@ a#home {
     text-align: center;
     border: 1px solid grey;
 }
-
 #liste {
     margin-top: 30px;
     height: 500px;
+    width: 280px;
+    float: left;
+    margin-left: 120px;
 }
 #liste li:hover {
     background-color : rgb(201,146,62);
-    color: rgb(250, 248, 248);
+    color: white;
     width: 250px;
     height: 30px;
     border-radius: 5px;
@@ -89,30 +93,52 @@ a#home {
 }
 footer {
     clear: both;
-    position: relative;
     text-align: center;
+    margin:auto;
 }
 #infoSupp{
-    width: 600px;
+    width: 470px;
 }
-
-
 article.descWines {
-width: 400px;
-float: right;
-
+    margin: 35px 120px 0px 0px;
+    width: 380px;
+    float: right;
 }
-
-aside {
-    width: 200px;
-    float: left;
-}
-
 #bottle {
     float: left;
-    margin: 110px 50px 50px 150px;
+    margin: 95px 0px 0px 70px;
 }
 #nav-tab .active {
-    background-color: #0d6efd;
-    color: aliceblue;
+    clear: both;
+    background-color:rgb(8,94,214);
+    color: white;
+}
+#adds{
+    margin: 20px 0px 20px 0px;
+    width: 445px;
+}
+#form1{
+    width: 800px;
+    margin: 30px 0px 20px 0px;
+}
+.nav-link{
+    color: green;
+}
+#pays{
+    margin-right: 2px;
+}
+#filter{
+    background-color:rgb(201,146,62);
+    color: white;
+    margin-left: 2px;
+    border: none;
+}
+#image{
+    margin-right: 4px;
+}
+#note{
+    margin-right: 4px;
+}
+#like{
+    margin-right: 4px;
 }
