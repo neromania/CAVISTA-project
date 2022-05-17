@@ -1,4 +1,5 @@
 const list = [];
+let credentials;
 let barChart = null;
 function descriptionBottle(element) {
         const imgBottle = document.getElementsByTagName('img')[1];
@@ -67,10 +68,11 @@ window.onload = function(){
     let remember = document.getElementById('rmbr');
     const btnSubmit = document.getElementById('btnSign');
     btnSubmit.onclick = function(){
+
         if (remember.checked) {
             //données sauvées dans le navigateur
             localStorage.setItem('credentials',btoa(login.value+':'+pwd.value)); 
-            let credentials = localStorage.getItem('credentials');
+            credentials = localStorage.getItem('credentials');
         }
         $('#exampleModal').stop().slideToggle('fast');
         $("body > div").removeClass();
@@ -93,6 +95,29 @@ function getComments(wineId){
     xhr.send();
 
 }
+/*
+//Requete d'ajout de commentaire via POST
+	const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+	const options = {
+        'method': 'get',
+        //'body': JSON.stringify({ "content" : "juste une fois...essayer" }),	//Try with true or false
+        'mode': 'cors',
+        'headers': {
+            'content-type': 'application/json; charset=utf-8',
+            'Authorization': 'Basic '+btoa('ced:123')	//Try with other credentials (login:password)
+        }
+    };
+    
+    const fetchURL = '/wines/10/comments';
+    
+    fetch(apiURL + fetchURL, options).then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data){
+                console.log(data);
+            });
+        }
+    });
+*/
 function getTotalLike(wineId){
     const likeCount = document.getElementById("likeCount");
 
