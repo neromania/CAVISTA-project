@@ -22,82 +22,83 @@
             <a href="index.html"><img src="img/logo_caviste.png" alt="une coupe dorée"></a>
         </div>
         <h1 id="titre">Caviste</h1>
-            <div id="form1">  
-                <form action="#" method="get">
-                    <label for="searchBar">Search :</label>
-                    <input type="text" id="searchBar" placeholder="Make a research here..." value="">
-                    <button type="button" id="btnSearch">Search</button>
-                    <select name="pays" id="pays">
-                        <option value="All countries">All countries</option>
-                        <option value="Argentina">Argentina</option>
-                        <option value="Spain">Spain</option>
-                        <option value="United States">United States</option>
-                        <option value="France">France</option>
-                        <option value="Italy">Italy</option>
-                    </select>
-                    <select name="années" id="annees">
-                        <option value="All years">All years</option>
-                        <option value="2005">2005</option>
-                        <option value="2006">2006</option>
-                        <option value="2007">2007</option>
-                        <option value="2009">2009</option>
-                        <option value="2010">2010</option>
-                        <option value="2011">2011</option>
-                    </select>
-                    <button id="filter" type="submit">Filter</button>
-                </form>
-            </div> 
-            <div id="liste">
+        <form action="#" method="get" id="filtre">
+            <div class="form">
+                <label for="searchBar">Search :</label>
+                <input type="text" id="searchBar" placeholder="Make a research here..." value="">
+                <button type="button" id="btnSearch">Search</button>
+                <select name="pays" id="pays">
+                    <option value="All countries">All countries</option>
+                    <option value="Argentina">Argentina</option>
+                    <option value="Spain">Spain</option>
+                    <option value="United States">United States</option>
+                    <option value="France">France</option>
+                    <option value="Italy">Italy</option>
+                </select>
+                <select name="années" id="annees">
+                    <option value="All years">All years</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                </select>
+                <button id="filter" type="submit">Filter</button>
+            </div>
+            <div>   
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
                     <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form>
-                                    <!-- Email input -->
-                                    <div class="form-outline mb-4">
-                                        <input type="text" id="login" class="form-control" >
-                                        <label class="form-label" for="login">Login</label>
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
+                                <!-- Email input -->
+                                <div class="form-outline mb-4">
+                                  <input type="text" id="login" class="form-control" >
+                                  <label class="form-label" for="login">Login</label>
+                                </div>
+                              
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                  <input type="password" id="pwd" class="form-control" >
+                                  <label class="form-label" for="pwd">Password</label>
+                                </div>
+                              
+                                <!-- 2 column grid layout for inline styling -->
+                                <div class="row mb-4">
+                                  <div class="col d-flex justify-content-center">
+                                    <!-- Checkbox -->
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="rmbr">
+                                      <label class="form-check-label" for="rmbr"> Remember me </label>
                                     </div>
-                                
-                                    <!-- Password input -->
-                                    <div class="form-outline mb-4">
-                                        <input type="password" id="pwd" class="form-control" >
-                                        <label class="form-label" for="pwd">Password</label>
-                                    </div>
-                                
-                                    <!-- 2 column grid layout for inline styling -->
-                                    <div class="row mb-4">
-                                        <div class="col d-flex justify-content-center">
-                                            <!-- Checkbox -->
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="rmbr">
-                                                <label class="form-check-label" for="rmbr"> Remember me </label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" id="btnSign">SIGN IN</button>
-                            </div>
+                                  </div>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" id="btnSign">SIGN IN</button>
                         </div>
                     </div>
+                    </div>
                 </div>
-            </div> 
+            </div>
+        </form>
     </header>
 <main>
+    <aside>
+        <ul id="liste">
+        </ul>
+    </aside>
     <div id="bottle">
-        <img src="img/bartender.png" alt="bottle of wine" width="260" height="295"> 
+        <img src="img/bartender.png" alt="bottle of wine" width="180px"> 
     </div>
     <article class="descWines">
-        <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
-        <div id="wineList">
-            <ul>
+            <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
+        <ul>
             <li id="grape"><strong>Grapes: </strong></li>
             <li id="country"><strong>Country: </strong></li>
             <li id="region"><strong>Region: </strong></li>
@@ -106,32 +107,30 @@
             <li id="color"><strong>Color: </strong></li>
             <li id="price"><strong>Price: </strong></li>
         </ul>
-        </div>
-        <div id="adds">
-             <form action="#" onclick="" id="form2">
-                <button type="button" id="image">📷 Add a picture</button>
-                <button type="button" id="note">✎ Add a note</button>
-                <button type="button" id="like" class="btn btn-danger">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
-            </form>
-        </div>
+        <form action="#" onclick="">
+            <button type="button" id="image">📷 Add a picture</button>
+            <button type="button" id="note">✎ Add a note</button>
+            <button type="button" id="like"class="btn btn-danger">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
+        </form>
         <div id="infoSupp">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                    <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
-                    <button class="nav-link" id="nav-comments-tab" data-bs-toggle="tab" data-bs-target="#nav-comments" type="button" role="tab" aria-controls="nav-comments" aria-selected="false">Comments</button>
-                    <button class="nav-link" id="nav-notes-tab" data-bs-toggle="tab" data-bs-target="#nav-notes" type="button" role="tab" aria-controls="nav-notes" aria-selected="false">Personal notes</button>
-                    <button class="nav-link" id="nav-graph-tab" data-bs-toggle="tab" data-bs-target="#nav-graph" type="button" role="tab" aria-controls="nav-graph" aria-selected="false">Graphics</button>
+                  <button class="nav-link active" id="nav-description-tab" data-bs-toggle="tab" data-bs-target="#nav-description" type="button" role="tab" aria-controls="nav-description" aria-selected="true">Description</button>
+                  <button class="nav-link" id="nav-comments-tab" data-bs-toggle="tab" data-bs-target="#nav-comments" type="button" role="tab" aria-controls="nav-comments" aria-selected="false">Comments</button>
+                  <button class="nav-link" id="nav-notes-tab" data-bs-toggle="tab" data-bs-target="#nav-notes" type="button" role="tab" aria-controls="nav-notes" aria-selected="false">personal notes</button>
+                  <button class="nav-link" id="nav-graph-tab" data-bs-toggle="tab" data-bs-target="#nav-graph" type="button" role="tab" aria-controls="nav-graph" aria-selected="false">graphics</button>
                 </div>
             </nav>
-                <div class="tab-content" id="nav-tabContent">
-                    <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">No informations yet...</div>
-                    <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">No informations yet...</div>
-                    <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">No informations yet...</div>
-                    <div class="tab-pane fade" id="nav-graph" role="tabpanel" aria-labelledby="nav-graph-tab"><canvas id="myChart" aria-label="chart" role="img"></canvas></div>
-                </div> 
+              <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">No informations yet...</div>
+                <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">No informations yet...</div>
+                <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">No informations yet...</div>
+                <div class="tab-pane fade" id="nav-graph" role="tabpanel" aria-labelledby="nav-graph-tab"><canvas id="myChart" aria-label="chart" role="img" ></canvas></div>
+              </div>
+            </div> 
         </div>     
     </article>  
 </main>
-<footer>&copy; EPFC 2021-2022</footer>
+<footer>EPFC 2021-2022</footer>
 </body>
 </html>

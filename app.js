@@ -1,4 +1,5 @@
 const list = [];
+let barChart = null;
 function descriptionBottle(element) {
         const imgBottle = document.getElementsByTagName('img')[1];
         const nameTitle = document.getElementById("nameWine"); 
@@ -34,16 +35,28 @@ function descriptionBottle(element) {
             tabNames.push(i.name);
             tabPrices.push(i.price);
         }
+        if (barChart != null) {
+            barChart.destroy();
+        }
         tabCountryClean = [...new Set(tabCountrys)];
-            let barChart = new Chart(myGraph, {
-                type: "line",
+            barChart = new Chart(myGraph, {
+                type: "pie",
                 data: {
                 labels: [element.country,tabCountryClean[1],tabCountryClean[2],tabCountryClean[3],tabCountryClean[4]],
                     datasets: [{
-                        data: [element.price,tabPrices[1],tabPrices[2],tabPrices[3],tabPrices[4]]
+                        data: [element.price,tabPrices[1],tabPrices[2],tabPrices[3],tabPrices[4]],
+                        backgroundColor: [
+                            'crimson',
+                            'lightgreen',
+                            'lightblue',
+                            'orange',
+                            'violet',
+                        ],
+                        hoverOffset: 40
                     }]
-                }
+                },
             })
+
         
 }
 //Formulaire de connexions
