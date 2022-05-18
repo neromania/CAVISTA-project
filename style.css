@@ -1,6 +1,7 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
     height: 900px;
+    width: 1350px;
 }
 #logo {
     float : left;
@@ -67,7 +68,7 @@ a#home {
 #liste li{
     background-color:none;
     list-style: none;
-    width: 260px;
+    width: 290px;
     height: 30px;
     border-radius: 5px;
     text-align: center;
@@ -98,8 +99,10 @@ footer {
 
 
 article.descWines {
-width: 400px;
+width: 500px;
 float: right;
+margin-right: 70px;
+margin-top: 60px;
 
 }
 
@@ -120,4 +123,7 @@ aside {
     width: 45%;
     height: 65%;
     margin: auto;
+}
+#nav-tab{
+    width: 490px;
 }
