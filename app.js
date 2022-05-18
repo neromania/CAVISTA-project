@@ -186,7 +186,23 @@ function getTotalLike(wineId){
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/likes-count',true);
     xhr.send();
 }
+/*function addLike(){
+    let like = document.getElementById("like");
+    likeCount = document.getElementById("likeCount");
 
+    xhr = new XMLHttpRequest();
+    xhr.onload = function (e){
+        const doc = this.responseText;
+        const data = JSON.parse(doc);
+        like.onclick = function(){
+            let newData = data.total++;
+            likeCount.innerHTML = '<em>♥ '+newData+'</em>';
+        }
+};
+xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/likes-count',true);
+xhr.send();
+}
+*/
 
 const xhr = new XMLHttpRequest();
 
@@ -206,11 +222,12 @@ xhr.onload = function (){
     }
     //Select
     let tabcleanYears = [...new Set(tabYears)];
+    tabcleanYears.sort();
     for(let i  of tabcleanYears ){
         years.innerHTML += '<option>'+i+'</option>';
-
     }
     let tabcleanCountries = [...new Set(tabCountries)];
+    tabcleanCountries.sort();
     for(let i  of tabcleanCountries ){
         countries.innerHTML += '<option>'+i+'</option>';
 
@@ -280,5 +297,3 @@ xhr.onload = function (){
 
 xhr.open('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines',true);
 xhr.send();
-
-
