@@ -16,8 +16,8 @@ window.onload = function(){
             login.value = login.value;
             pwd.value = pwd.value;
         } else {
-            credentials = btoa(login.value+':'+pwd.value);
-            console.log(credentials);
+            credentials = (login.value+':'+pwd.value);
+            //console.log(credentials);
         }
     }
 
@@ -79,8 +79,7 @@ function descriptionBottle(element) {
                     }]
                 },
             })
-
-            
+  
             const btnComment = document.getElementById('btnSend');
             btnComment.onclick = function (){
             //Requete d'ajout de commentaire via POST
@@ -91,9 +90,12 @@ function descriptionBottle(element) {
                 'mode': 'cors',
                 'headers': {
                     'content-type': 'application/json; charset=utf-8',
-                    'Authorization': 'Basic '+btoa( atob(credentials))	//Try with other credentials (login:password)
-                }
+                    'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+                } 
+                  
     };
+    
+    
     
     const fetchURL = '/wines/'+element.id+'/comments';
     
@@ -105,7 +107,38 @@ function descriptionBottle(element) {
         }
     });
         }
+        const btnNotes = document.getElementById('btnSave');
+        btnNotes.onclick = function (){
+        //Requete d'ajout de commentaire via POST
+        const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+        const options = {
+            'method': 'put',
+            'body': JSON.stringify({ "note" : document.getElementById('notes-area').value }),	//Try with true or false
+            'mode': 'cors',
+            'headers': {
+                'content-type': 'application/json; charset=utf-8',
+                'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+            }
+
+            
+};
+
+
+const fetchURL = '/wines/'+element.id+'/notes';
+
+fetch(apiURL + fetchURL, options).then(function(response) {
+    if(response.ok) {
+        response.json().then(function(data){
+            console.log(data);
+        });
+    }
+});
+    }
+
 }
+
+
+
 
 function getComments(wineId){
     const comments = document.getElementById("nav-comments");
@@ -135,6 +168,30 @@ function getComments(wineId){
     };
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
     xhr.send();
+}
+function getNotes(wineId) {
+    let notes = document.getElementById("nav-notes");
+
+    const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php';
+	const options = {
+        'method': 'get',
+        //'body': JSON.stringify({ "note": "Une touche d'amertume" }),	//Try with true or false
+        'mode': 'cors',
+        'headers': {
+            'content-type': 'application/json; charset=utf-8',
+            'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+        }
+    };
+    
+    const fetchURL = '/api/wines/'+wineId+'/notes';
+    
+    fetch(apiURL + fetchURL, options).then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data){
+                notes.innerHTML = '<p>'+data.note+'</p>'; 
+            });
+        }
+    });
 }
 
 function getTotalLike(wineId){
@@ -201,6 +258,7 @@ xhr.onload = function (){
                                 error.innerHTML = '<p>No informations yet...</p>' ;   
                             } else {
                                 getComments(wine.id);
+                                getNotes(wine.id);
                             }
                         }
                     }
