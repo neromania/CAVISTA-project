@@ -1,6 +1,27 @@
 const list = [];
 let credentials;
 let barChart = null;
+//Formulaire de connexions
+window.onload = function(){
+    //Recuperation des données de connexions
+    let login = document.getElementById('login');
+    let pwd = document.getElementById('pwd');
+    let remember = document.getElementById('rmbr');
+    const btnSubmit = document.getElementById('btnSign');
+    btnSubmit.onclick = function(){
+        if (remember.checked) {         
+            //données sauvées dans le navigateur
+            localStorage.setItem('credentials',btoa(login.value+':'+pwd.value)); 
+            credentials = localStorage.getItem('credentials');
+            login.value = login.value;
+            pwd.value = pwd.value;
+        } else {
+            credentials = btoa(login.value+':'+pwd.value);
+            console.log(credentials);
+        }
+    }
+
+}
 function descriptionBottle(element) {
         const imgBottle = document.getElementsByTagName('img')[1];
         const nameTitle = document.getElementById("nameWine"); 
@@ -26,72 +47,21 @@ function descriptionBottle(element) {
         color.innerHTML = '<strong>Color: </strong><em>'+element.color+'</em>';
         price.innerHTML = '<strong>Price: </strong><em>'+element.price +' €</em>';
         desc.innerHTML = element.description;
-        let tabCountries = [];
+        let tabCountrys = [];
         let tabPrices = [];
         let tabNames = [];
         let tabCountryClean;
-        
-  
-            //Ajout de notes via POST
-            const notes = document.getElementById('notes-area');
-            const btnSend = document.getElementById('btSend');
-            btnSend.onclick = function (){
-
-                const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
-
-             options = {
-                'method': 'put',
-                'body': JSON.stringify({ "content" : notes.value }),	//Try with true or false
-                'mode': 'cors',
-                'headers': {
-                    'content-type': 'application/json; charset=utf-8',
-                    'Authorization': 'Basic '+btoa('ced:123')	//Try with other credentials (login:password)
-                }
-            };
-            
-            fetchURL = '/wines/'+element.id+'/notes';
-            
-            fetch(apiURL + fetchURL, options).then(function(response) {
-                if(response.ok) {
-                    response.json().then(function(data){
-                        console.log(data);
-                    });
-                }
-            });
-        }
-        
-//Requete récupération des notes via GET
-const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
-let options = {
-    'method': 'get',
-    //'body': JSON.stringify({ "content" : "juste une fois...essayer" }),	//Try with true or false
-    'mode': 'cors',
-    'headers': {
-        'content-type': 'application/json; charset=utf-8',
-        'Authorization': 'Basic '+btoa('ced:123')	//Try with other credentials (login:password)
-    }
-};
-let fetchURL = '/wines/'+element.id+'/notes';
-            
-fetch(apiURL + fetchURL, options).then(function(response) {
-    if(response.ok) {
-        response.json().then(function(data){
-            console.log(data);
-        });
-    }
-});
-
 
         //Graphics tab
         for(let i of list){
-            tabCountries.push(i.country);
+            tabCountrys.push(i.country);
             tabNames.push(i.name);
             tabPrices.push(i.price);
         }
         if (barChart != null) {
             barChart.destroy();
         }
-        tabCountryClean = [...new Set(tabCountries)];
+        tabCountryClean = [...new Set(tabCountrys)];
             barChart = new Chart(myGraph, {
                 type: "pie",
                 data: {
@@ -110,31 +80,32 @@ fetch(apiURL + fetchURL, options).then(function(response) {
                 },
             })
 
-        
-}
-
-//Formulaire de connexions
-window.onload = function(){
-    //Recuperation des données de connexions
-    let login = document.getElementById('login');
-    let pwd = document.getElementById('pwd');
-    let remember = document.getElementById('rmbr');
-    const btnSubmit = document.getElementById('btnSign');
-    btnSubmit.onclick = function(){
-
-        if (remember.checked) {
-            //données sauvées dans le navigateur
-            localStorage.setItem('credentials',btoa(login.value+':'+pwd.value)); 
-            credentials = localStorage.getItem('credentials');
+            
+            const btnComment = document.getElementById('btnSend');
+            btnComment.onclick = function (){
+            //Requete d'ajout de commentaire via POST
+	        const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+	        const options = {
+                'method': 'post',
+                'body': JSON.stringify({ "content" : document.getElementById('comment-area').value }),	//Try with true or false
+                'mode': 'cors',
+                'headers': {
+                    'content-type': 'application/json; charset=utf-8',
+                    'Authorization': 'Basic '+btoa('ismail:123')	//Try with other credentials (login:password)
+                }
+    };
+    
+    const fetchURL = '/wines/'+element.id+'/comments';
+    
+    fetch(apiURL + fetchURL, options).then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data){
+                console.log(data);
+            });
         }
-        credentials = btoa(login.value+':'+pwd.value);
-        $('#exampleModal').stop().slideToggle('fast');
-        $("body > div").removeClass();
-        console.log(credentials);
-    }
+    });
+        }
 }
-
-
 
 function getComments(wineId){
     const comments = document.getElementById("nav-comments");
@@ -151,29 +122,21 @@ function getComments(wineId){
     xhr.send();
 
 }
-/*
-//Requete d'ajout de commentaire via POST
-	const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
-	const options = {
-        'method': 'get',
-        //'body': JSON.stringify({ "content" : "juste une fois...essayer" }),	//Try with true or false
-        'mode': 'cors',
-        'headers': {
-            'content-type': 'application/json; charset=utf-8',
-            'Authorization': 'Basic '+btoa('ced:123')	//Try with other credentials (login:password)
+function getComments(wineId){
+    let comments = document.getElementById("nav-comments");
+    const xhr = new XMLHttpRequest();
+    comments.innerHTML = "";
+    xhr.onload = function (e){
+        const doc = this.responseText;
+        const data = JSON.parse(doc);
+        for(let i = 0; i < data.length; i++){
+            comments.innerHTML += '<p>user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>'; 
         }
     };
-    
-    const fetchURL = '/wines/10/comments';
-    
-    fetch(apiURL + fetchURL, options).then(function(response) {
-        if(response.ok) {
-            response.json().then(function(data){
-                console.log(data);
-            });
-        }
-    });
-*/
+    xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
+    xhr.send();
+}
+
 function getTotalLike(wineId){
     const likeCount = document.getElementById("likeCount");
 
@@ -186,23 +149,7 @@ function getTotalLike(wineId){
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/likes-count',true);
     xhr.send();
 }
-/*function addLike(){
-    let like = document.getElementById("like");
-    likeCount = document.getElementById("likeCount");
 
-    xhr = new XMLHttpRequest();
-    xhr.onload = function (e){
-        const doc = this.responseText;
-        const data = JSON.parse(doc);
-        like.onclick = function(){
-            let newData = data.total++;
-            likeCount.innerHTML = '<em>♥ '+newData+'</em>';
-        }
-};
-xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/likes-count',true);
-xhr.send();
-}
-*/
 
 const xhr = new XMLHttpRequest();
 
@@ -230,10 +177,10 @@ xhr.onload = function (){
     tabcleanCountries.sort();
     for(let i  of tabcleanCountries ){
         countries.innerHTML += '<option>'+i+'</option>';
-
     }
-    //console.log(tabclean);
 
+
+    
     for(let i of list){
         const liste = document.getElementById('liste');
         liste.innerHTML += '<li id="'+i.id+'">'+i.name+'</li>';
@@ -244,10 +191,8 @@ xhr.onload = function (){
 
         for(let item of items){ 
             item.onclick = function () {
-                    //console.log(this);
                     for(let wine of list){
                         if (wine.name.indexOf(this.innerHTML) != -1) {
-                            //console.log(wine.name);
                             getTotalLike(wine.id);
                             descriptionBottle(wine);
                             //Error with the API with thoses ids => no comments ;
@@ -285,8 +230,7 @@ xhr.onload = function (){
                                         error.innerHTML = '<p>No informations yet...</p>' ; 
                                     } else {
                                         getComments(wine.id);
-                                    }
-                                                            
+                                    }              
                                 }
                             }
                             }

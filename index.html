@@ -23,55 +23,56 @@
         </div>
         <h1 id="titre">Caviste</h1>
         <form action="#" method="get" id="filtre">
-            <div class="form">
-                <label for="searchBar">Search :</label>
-                <input type="text" id="searchBar" placeholder="Make a research here..." value="">
-                <button type="button" id="btnSearch">Search</button>
-                <select name="countries" id="countries">
-                   <option value="allCountries">All countries</option>
-                </select>
-                <select name="years" id="years">
-                    <option value="allYears">All years</option>
-                </select>
-                <button id="filter" type="submit">Filter</button>
-            </div>
+          <div class="form">
+              <label for="searchBar">Search :</label>
+              <input type="text" id="searchBar" placeholder="Make a research here..." value="">
+              <button type="button" id="btnSearch">Search</button>
+              <select name="countries" id="countries">
+                 <option value="allCountries">All countries</option>
+              </select>
+              <select name="years" id="years">
+                  <option value="allYears">All years</option>
+              </select>
+              <button id="filter" type="submit">Filter</button>
+          </div>
             <div>   
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
                     <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Connexion</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form>
                                 <!-- Email input -->
                                 <div class="form-outline mb-4">
-                                    <input type="text" id="login" class="form-control" >
-                                    <label class="form-label" for="login">Login</label>
+                                  <input type="text" id="login" class="form-control" >
+                                  <label class="form-label" for="login">Login</label>
                                 </div>
-                            
+                              
                                 <!-- Password input -->
                                 <div class="form-outline mb-4">
-                                    <input type="password" id="pwd" class="form-control" >
-                                    <label class="form-label" for="pwd">Password</label>
+                                  <input type="password" id="pwd" class="form-control" >
+                                  <label class="form-label" for="pwd">Password</label>
                                 </div>
-                            
+                              
                                 <!-- 2 column grid layout for inline styling -->
                                 <div class="row mb-4">
-                                    <div class="col d-flex justify-content-center">
-                                        <!-- Checkbox -->
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" value="" id="rmbr">
-                                            <label class="form-check-label" for="rmbr"> Remember me </label>
-                                        </div>
+                                  <div class="col d-flex justify-content-center">
+                                    <!-- Checkbox -->
+                                    <div class="form-check">
+                                      <input class="form-check-input" type="checkbox" value="" id="rmbr">
+                                      <label class="form-check-label" for="rmbr"> Remember me </label>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary" id="btnSign">SIGN IN</button>
-                            </div>
+                                  </div>
                         </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="btnSign">SIGN IN</button>
+                        </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -83,10 +84,10 @@
         </ul>
     </aside>
     <div id="bottle">
-        <img src="img/bartender.png" alt="bottle of wine" width="200" height="260"> 
+        <img src="img/bartender.png" alt="bottle of wine" width="180" height="240"> 
     </div>
     <article class="descWines">
-            <span id="idWine">#0</span><h3 id="nameWine">Wines</h3>
+            <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
         <ul>
             <li id="grape"><strong>Grapes: </strong></li>
             <li id="country"><strong>Country: </strong></li>
@@ -96,11 +97,16 @@
             <li id="color"><strong>Color: </strong></li>
             <li id="price"><strong>Price: </strong></li>
         </ul>
-        <form action="#" onclick="">
-            <button type="button" id="image">📷 Add a picture</button>
-            <button type="button" id="note">✎ Add a note</button>
-            <button type="button" id="like" class="btn btn-danger">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
-        </form>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#pictureModal" id="addImage">
+                📷 Add a picture
+              </button>
+            <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#commentModal" id="addComment">
+                ✎ Add a comment
+              </button>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#noteModal" id="addNote">
+                ✎ Add a note
+              </button>
+            <button type="button" id="like"class="btn btn-danger">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
         <div id="infoSupp">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -113,10 +119,29 @@
               <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">No informations yet...</div>
                 <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">No informations yet...</div>
-                <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab"><textarea name="notes-area" id="notes-area" cols="50" rows="5"></textarea><button id="btSend">Send</button></div>
+                <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab"></div>
                 <div class="tab-pane fade" id="nav-graph" role="tabpanel" aria-labelledby="nav-graph-tab"><canvas id="myChart" aria-label="chart" role="img" ></canvas></div>
               </div>
-        </div>     
+            </div> 
+        </div>   
+        <!-- Modal -->
+        <div class="modal fade" id="commentModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add your comments</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+              <textarea name="comment-area" id="comment-area" cols="50" rows="10">...</textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="btnSend">Send</button>
+              </div>
+            </div>
+          </div>
+        </div>  
     </article>  
 </main>
 <footer>EPFC 2021-2022</footer>
