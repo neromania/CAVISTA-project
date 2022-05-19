@@ -91,7 +91,7 @@ function descriptionBottle(element) {
                 'mode': 'cors',
                 'headers': {
                     'content-type': 'application/json; charset=utf-8',
-                    'Authorization': 'Basic '+btoa('ismail:123')	//Try with other credentials (login:password)
+                    'Authorization': 'Basic '+btoa( atob(credentials))	//Try with other credentials (login:password)
                 }
     };
     
