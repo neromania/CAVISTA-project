@@ -97,6 +97,7 @@
             <li id="color"><strong>Color: </strong></li>
             <li id="price"><strong>Price: </strong></li>
         </ul>
+        <nav id="interactions">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#pictureModal" id="addImage">
                 📷 Add a picture
               </button>
@@ -106,7 +107,8 @@
               <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#noteModal" id="addNote">
                 ✎ Add a note
               </button>
-            <button type="button" id="like"class="btn btn-danger">♥ Like this wine</button> <span id="likeCount">♥ 0</span>
+            <button type="button" id="like" class="btn btn-danger">Like this wine<span id="likeCount"> ♥  0</span></button>
+          </nav>
         <div id="infoSupp">
             <nav>
                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -119,7 +121,7 @@
               <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-description" role="tabpanel" aria-labelledby="nav-description-tab">No informations yet...</div>
                 <div class="tab-pane fade" id="nav-comments" role="tabpanel" aria-labelledby="nav-comments-tab">No informations yet...</div>
-                <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab"></div>
+                <div class="tab-pane fade" id="nav-notes" role="tabpanel" aria-labelledby="nav-notes-tab">No informations yet...</div>
                 <div class="tab-pane fade" id="nav-graph" role="tabpanel" aria-labelledby="nav-graph-tab"><canvas id="myChart" aria-label="chart" role="img" ></canvas></div>
               </div>
             </div> 

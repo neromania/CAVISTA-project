@@ -119,10 +119,7 @@ function descriptionBottle(element) {
                 'content-type': 'application/json; charset=utf-8',
                 'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
             }
-
-            
 };
-
 
 const fetchURL = '/wines/'+element.id+'/notes';
 
@@ -137,24 +134,6 @@ fetch(apiURL + fetchURL, options).then(function(response) {
 
 }
 
-
-
-
-function getComments(wineId){
-    const comments = document.getElementById("nav-comments");
-    comments.innerHTML = "";
-    const xhr = new XMLHttpRequest();
-    xhr.onload = function (e){
-        const doc = this.responseText;
-        const data = JSON.parse(doc);
-        for(let i = 0; i < data.length; i++){
-            comments.innerHTML += '<p>user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>'; 
-        }
-    };
-    xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
-    xhr.send();
-
-}
 function getComments(wineId){
     let comments = document.getElementById("nav-comments");
     const xhr = new XMLHttpRequest();
@@ -175,7 +154,6 @@ function getNotes(wineId) {
     const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php';
 	const options = {
         'method': 'get',
-        //'body': JSON.stringify({ "note": "Une touche d'amertume" }),	//Try with true or false
         'mode': 'cors',
         'headers': {
             'content-type': 'application/json; charset=utf-8',
@@ -184,7 +162,6 @@ function getNotes(wineId) {
     };
     
     const fetchURL = '/api/wines/'+wineId+'/notes';
-    
     fetch(apiURL + fetchURL, options).then(function(response) {
         if(response.ok) {
             response.json().then(function(data){
@@ -193,6 +170,40 @@ function getNotes(wineId) {
         }
     });
 }
+
+function addLike(wineId) {
+    const btnLike = document.getElementById('like');
+    btnLike.onclick = function (e){
+        let liked;
+        fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/41/likes/wines')
+        .then(response => response.json())
+        .then(json => (json == wineId) ? console.log(json[0].id, wineId) : console.log('false')   );
+    //Requete d'ajout de like via put
+    const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+    const options = {
+        'method': 'put',
+        'body': JSON.stringify({ "like" : true }),	//Try with true or false
+        'mode': 'cors',
+        'headers': {
+            'content-type': 'application/json; charset=utf-8',
+            'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+        }
+};
+
+const fetchURL = '/wines/'+wineId+'/like';
+
+fetch(apiURL + fetchURL, options).then(function(response) {
+if(response.ok) {
+    response.json().then(function(data){
+        console.log(data);
+        //btnLike.value = liked;
+    });
+}
+});
+}
+
+}
+
 
 function getTotalLike(wineId){
     const likeCount = document.getElementById("likeCount");
@@ -259,6 +270,7 @@ xhr.onload = function (){
                             } else {
                                 getComments(wine.id);
                                 getNotes(wine.id);
+                                addLike(wine.id);
                             }
                         }
                     }

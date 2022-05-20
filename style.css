@@ -93,6 +93,9 @@ a#home {
     text-align: center;
     list-style: none;
 }
+#interactions{
+    width: 620px;
+}
 footer {
     clear: both;
     text-align: center;
@@ -118,7 +121,7 @@ aside {
     margin: 110px 0px 50px 330px;
 }
 #nav-tab .active {
-    background-color: #0d6efd;
+    background-color: rgb(201,146,62);
     color: aliceblue;
 }
 #nav-graph  {
