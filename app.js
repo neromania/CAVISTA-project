@@ -1,5 +1,6 @@
 const list = [];
 let credentials;
+let idCredentials;
 let barChart = null;
 //Formulaire de connexions
 window.onload = function(){
@@ -8,19 +9,42 @@ window.onload = function(){
     let pwd = document.getElementById('pwd');
     let remember = document.getElementById('rmbr');
     const btnSubmit = document.getElementById('btnSign');
+
     btnSubmit.onclick = function(){
         if (remember.checked) {         
             //données sauvées dans le navigateur
             localStorage.setItem('credentials',btoa(login.value+':'+pwd.value)); 
             credentials = localStorage.getItem('credentials');
-            login.value = login.value;
-            pwd.value = pwd.value;
-        } else {
-            credentials = (login.value+':'+pwd.value);
+
             //console.log(credentials);
         }
+                
+        login.value = login.value;
+        pwd.value = pwd.value;
+        credentials = (login.value+':'+pwd.value);
+            //authentifications
+	const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+	const options = {
+        'method': 'get',
+       // 'body': JSON.stringify({ "like" : true }),	//Try with true or false
+        'mode': 'cors',
+        'headers': {
+            'content-type': 'application/json; charset=utf-8',
+            'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+        }
+    };
+    
+    const fetchURL = '/users/authenticate';
+    
+    fetch(apiURL + fetchURL, options).then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data){
+                idCredentials = data.id;
+                console.log(data.id);
+            });
+        }
+    });
     }
-
 }
 function descriptionBottle(element) {
         const imgBottle = document.getElementsByTagName('img')[1];
@@ -173,33 +197,86 @@ function getNotes(wineId) {
 
 function addLike(wineId) {
     const btnLike = document.getElementById('like');
+    let options = {};
+    let fetchURL;
     btnLike.onclick = function (e){
-        let liked;
-        fetch('https://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/41/likes/wines')
-        .then(response => response.json())
-        .then(json => (json == wineId) ? console.log(json[0].id, wineId) : console.log('false')   );
     //Requete d'ajout de like via put
-    const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
-    const options = {
-        'method': 'put',
-        'body': JSON.stringify({ "like" : true }),	//Try with true or false
-        'mode': 'cors',
-        'headers': {
-            'content-type': 'application/json; charset=utf-8',
-            'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+    const xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+        const doc = this.responseText;
+        const data = JSON.parse(doc);
+                const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+                if(data.length > 0){
+                for(let i in data){
+                    if(data[i].id.indexOf(wineId) != -1) {
+                        options = {
+                            'method': 'put',
+                            'body': JSON.stringify({ "like" : false }),	//Try with true or false
+                            'mode': 'cors',
+                            'headers': {
+                                'content-type': 'application/json; charset=utf-8',
+                                'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+                            }
+                        };
+                    fetchURL = '/wines/'+wineId+'/like';
+                        fetch(apiURL + fetchURL, options).then(function(response) {
+                        if(response.ok) {
+                            response.json().then(function(data){
+                                getTotalLike(wineId);
+                                console.log(data);
+                            });
+                        }
+                        });
+                        } else {
+                            options = {
+                                'method': 'put',
+                                'body': JSON.stringify({ "like" : true }),	//Try with true or false
+                                'mode': 'cors',
+                                'headers': {
+                                    'content-type': 'application/json; charset=utf-8',
+                                    'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+                                }
+                            };
+                    fetchURL = '/wines/'+wineId+'/like';
+                        fetch(apiURL + fetchURL, options).then(function(response) {
+                        if(response.ok) {
+                            response.json().then(function(data){
+                                getTotalLike(wineId);
+                                console.log(data);
+                            });
+                        }
+                        });
+                        }
+                }
+            } else {
+                const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+                const options = {
+                    'method': 'PUT',
+                    'body': JSON.stringify({ "like" : true }),	//Try with true or false
+                    'mode': 'cors',
+                    'headers': {
+                        'content-type': 'application/json; charset=utf-8',
+                        'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+                    }
+                };
+                
+                const fetchURL = '/wines/'+wineId+'/like';
+                
+                fetch(apiURL + fetchURL, options).then(function(response) {
+                    if(response.ok) {
+                        response.json().then(function(data){
+                            getTotalLike(wineId);
+                            console.log(data);
+                        });
+                    }
+                });
+            }
+            
+
+
         }
-};
-
-const fetchURL = '/wines/'+wineId+'/like';
-
-fetch(apiURL + fetchURL, options).then(function(response) {
-if(response.ok) {
-    response.json().then(function(data){
-        console.log(data);
-        //btnLike.value = liked;
-    });
-}
-});
+        xhr.open('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/users/'+idCredentials+'/likes/wines',true);
+        xhr.send();
 }
 
 }
@@ -263,15 +340,9 @@ xhr.onload = function (){
                         if (wine.name.indexOf(this.innerHTML) != -1) {
                             getTotalLike(wine.id);
                             descriptionBottle(wine);
-                            //Error with the API with thoses ids => no comments ;
-                            if (wine.name == 'LAN Xtreme Biologico, Rioja Crianza'|| wine.name == 'Owen Roe "Ex Umbris"'  ) {
-                                const error = document.getElementById("nav-comments");
-                                error.innerHTML = '<p>No informations yet...</p>' ;   
-                            } else {
                                 getComments(wine.id);
-                                getNotes(wine.id);
                                 addLike(wine.id);
-                            }
+                                getNotes(wine.id);
                         }
                     }
                 }
@@ -294,13 +365,10 @@ xhr.onload = function (){
                                 if (wine.name.indexOf(this.innerHTML) != -1) {
                                     descriptionBottle(wine);    
                                     getTotalLike(wine.id);        
-                                    //Error with the API with thoses ids => no comments ;
-                                    if (wine.name == 'LAN Xtreme Biologico, Rioja Crianza'|| wine.name == 'Owen Roe "Ex Umbris"'  ) {
-                                        const error = document.getElementById("nav-comments");
-                                        error.innerHTML = '<p>No informations yet...</p>' ; 
-                                    } else {
                                         getComments(wine.id);
-                                    }              
+                                        addLike(wine.id);
+                                        getNotes(wine.id);
+                                               
                                 }
                             }
                             }
