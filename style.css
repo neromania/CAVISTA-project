@@ -140,3 +140,10 @@ aside {
     color: rgb(250, 248, 248);
     border: none;
 }
+#btnDel{
+    background-color: rgb(211, 94, 94);
+    border-radius: 20px;
+    color: aliceblue;
+    border: 0.5px solid grey;
+    font-size: 6px ;
+}

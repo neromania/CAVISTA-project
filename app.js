@@ -13,15 +13,17 @@ window.onload = function(){
     btnSubmit.onclick = function(){
         if (remember.checked) {         
             //données sauvées dans le navigateur
-            localStorage.setItem('credentials',btoa(login.value+':'+pwd.value)); 
+            localStorage.setItem('credentials',(login.value+':'+pwd.value)); 
             credentials = localStorage.getItem('credentials');
 
             //console.log(credentials);
+        } else {
+            login.value = login.value;
+            pwd.value = pwd.value;
+            credentials = (login.value+':'+pwd.value);
         }
                 
-        login.value = login.value;
-        pwd.value = pwd.value;
-        credentials = (login.value+':'+pwd.value);
+
             //authentifications
 	const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
 	const options = {
@@ -157,6 +159,27 @@ fetch(apiURL + fetchURL, options).then(function(response) {
     }
 
 }
+function deleteComment(wineId, comID) {
+const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php';
+const options = {
+    'method': 'DELETE',
+    'mode': 'cors',
+    'headers': {
+        'content-type': 'application/json; charset=utf-8',
+        'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+    }
+};
+
+const fetchURL = '/api/wines/'+wineId+'/comments/'+comID;
+
+fetch(apiURL + fetchURL, options).then(function(response) {
+    if(response.ok) {
+        response.json().then(function(data){
+            console.log(data);
+        });
+    } 
+});
+}
 
 function getComments(wineId){
     let comments = document.getElementById("nav-comments");
@@ -166,7 +189,7 @@ function getComments(wineId){
         const doc = this.responseText;
         const data = JSON.parse(doc);
         for(let i = 0; i < data.length; i++){
-            comments.innerHTML += '<p>user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>'; 
+            comments.innerHTML += '<p>user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em><button id="btnDel"onclick="'+deleteComment(wineId,data[i].id)+'">x</button></p>'; 
         }
     };
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
@@ -174,7 +197,6 @@ function getComments(wineId){
 }
 function getNotes(wineId) {
     let notes = document.getElementById("nav-notes");
-
     const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php';
 	const options = {
         'method': 'get',
