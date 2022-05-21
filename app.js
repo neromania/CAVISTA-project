@@ -9,7 +9,7 @@ window.onload = function(){
     let pwd = document.getElementById('pwd');
     let remember = document.getElementById('rmbr');
     const btnSubmit = document.getElementById('btnSign');
-
+    $('#message').hide();
     btnSubmit.onclick = function(){
         if (remember.checked) {         
             //données sauvées dans le navigateur
@@ -119,13 +119,13 @@ function descriptionBottle(element) {
     };
     
     
-    
     const fetchURL = '/wines/'+element.id+'/comments';
     
     fetch(apiURL + fetchURL, options).then(function(response) {
         if(response.ok) {
             response.json().then(function(data){
                 console.log(data);
+                getComments(element.id)
             });
         }
     });
@@ -168,12 +168,7 @@ function getComments(wineId){
         for(let i = 0; i < data.length; i++){
             comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>'; 
         }
-        window.onload = function(){
-            const btnTest = document.getElementById('btnDel');
-            btnTest.onclick = function(){
-                deleteComment(wine.id, btnTest.value);
-            }     
-        }
+
     };
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
     xhr.send();
@@ -219,10 +214,13 @@ function delCom(wineId) {
                     if(response.ok) {
                         response.json().then(function(data){
                             console.log(data);
+                            if(data.success){
+                                i.innerHTML = "";
+                                $('#message').show().hide(5000);
+                            }
                         });
                     }
                 });
-                
             }
             }
     }
@@ -383,7 +381,6 @@ xhr.onload = function (){
            
                 btnSearch.onclick = function(){
                     liste.innerHTML = '';
-                    
                 for(let i of list){
                     if (i.name.toLowerCase().indexOf(inputSearch.value) != -1) {
                         liste.innerHTML += '<li id="'+i.id+'">'+i.name+'</li>';
