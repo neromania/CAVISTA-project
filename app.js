@@ -13,16 +13,13 @@ window.onload = function(){
     btnSubmit.onclick = function(){
         if (remember.checked) {         
             //données sauvées dans le navigateur
-            localStorage.setItem('credentials',(login.value+':'+pwd.value)); 
-            credentials = localStorage.getItem('credentials');
-
-            //console.log(credentials);
+            localStorage.setItem('login',login.value); 
+            pseudo = localStorage.getItem('login');
         } else {
             login.value = login.value;
             pwd.value = pwd.value;
-            credentials = (login.value+':'+pwd.value);
         }
-                
+            credentials = (login.value+':'+pwd.value);
 
             //authentifications
 	const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
@@ -156,30 +153,10 @@ fetch(apiURL + fetchURL, options).then(function(response) {
         });
     }
 });
-    }
-
+    }    
 }
-function deleteComment(wineId, comID) {
-const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php';
-const options = {
-    'method': 'DELETE',
-    'mode': 'cors',
-    'headers': {
-        'content-type': 'application/json; charset=utf-8',
-        'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
-    }
-};
 
-const fetchURL = '/api/wines/'+wineId+'/comments/'+comID;
 
-fetch(apiURL + fetchURL, options).then(function(response) {
-    if(response.ok) {
-        response.json().then(function(data){
-            console.log(data);
-        });
-    } 
-});
-}
 
 function getComments(wineId){
     let comments = document.getElementById("nav-comments");
@@ -189,7 +166,13 @@ function getComments(wineId){
         const doc = this.responseText;
         const data = JSON.parse(doc);
         for(let i = 0; i < data.length; i++){
-            comments.innerHTML += '<p>user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em><button id="btnDel"onclick="'+deleteComment(wineId,data[i].id)+'">x</button></p>'; 
+            comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>'; 
+        }
+        window.onload = function(){
+            const btnTest = document.getElementById('btnDel');
+            btnTest.onclick = function(){
+                deleteComment(wine.id, btnTest.value);
+            }     
         }
     };
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
@@ -216,7 +199,34 @@ function getNotes(wineId) {
         }
     });
 }
-
+function delCom(wineId) {
+    document.getElementById('nav-comments-tab').onclick = function (){
+        let btnDel = document.querySelectorAll('#nav-tabContent p');
+        for(let i of btnDel){
+            i.onclick = function(){
+                const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+                const options = {
+                    'method': 'delete',
+                    'mode': 'cors',
+                    'headers': {
+                        'content-type': 'application/json; charset=utf-8',
+                        'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+                    }
+                };
+                const fetchURL = '/wines/'+wineId+'/comments/'+i.id;
+                
+                fetch(apiURL + fetchURL, options).then(function(response) {
+                    if(response.ok) {
+                        response.json().then(function(data){
+                            console.log(data);
+                        });
+                    }
+                });
+                
+            }
+            }
+    }
+}
 function addLike(wineId) {
     const btnLike = document.getElementById('like');
     let options = {};
@@ -302,8 +312,6 @@ function addLike(wineId) {
 }
 
 }
-
-
 function getTotalLike(wineId){
     const likeCount = document.getElementById("likeCount");
 
@@ -365,6 +373,7 @@ xhr.onload = function (){
                                 getComments(wine.id);
                                 addLike(wine.id);
                                 getNotes(wine.id);
+                                delCom(wine.id);
                         }
                     }
                 }
@@ -389,8 +398,8 @@ xhr.onload = function (){
                                     getTotalLike(wine.id);        
                                         getComments(wine.id);
                                         addLike(wine.id);
-                                        getNotes(wine.id);
-                                               
+                                        getNotes(wine.id);  
+                                        delCom(wine.id);  
                                 }
                             }
                             }
