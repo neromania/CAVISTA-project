@@ -150,6 +150,7 @@ fetch(apiURL + fetchURL, options).then(function(response) {
     if(response.ok) {
         response.json().then(function(data){
             console.log(data);
+		getNotes(element.id);
         });
     }
 });
