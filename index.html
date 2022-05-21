@@ -24,7 +24,7 @@
         <h1 id="titre">Caviste</h1>
         <form action="#" method="get" id="filtre">
           <div class="form">
-              <input type="text" id="searchBar" placeholder="&#128270; Make a research here..." value="">
+              <input type="text" id="searchBar" placeholder="&#128270; Make a research here..." onKeyPress="if (event.keyCode == 13) btnSearch.onclick()">
               <button type="button" id="btnSearch">Search</button>
               <select name="countries" id="countries">
                  <option value="allCountries">All countries</option>
