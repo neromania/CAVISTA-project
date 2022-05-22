@@ -43,6 +43,8 @@ window.onload = function(){
             });
         }
     });
+    $('#exampleModal').stop().slideToggle('fast');
+    $("body > div").removeClass();
     }
 }
 function descriptionBottle(element) {
@@ -167,7 +169,7 @@ function getComments(wineId){
         const doc = this.responseText;
         const data = JSON.parse(doc);
         for(let i = 0; i < data.length; i++){
-            comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em>'+data[i].content+'</em> <button type="button" class="btn-close" disabled aria-label="Close"></button></em></p>'; 
+            comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em>'+data[i].content+'</em> <button type="button" class="btn-close" disabled aria-label="Close"></button></p>'; 
         }
 
     };
@@ -197,7 +199,7 @@ function getNotes(wineId) {
     });
 }
 function delCom(wineId) {
-    document.getElementById('nav-comments-tab').onclick = function (){
+        if (document.querySelectorAll('#nav-tabContent p').length > 0) {
         let btnDel = document.querySelectorAll('#nav-tabContent p');
         for(let i of btnDel){
             //console.log(i);
@@ -374,7 +376,9 @@ xhr.onload = function (){
                                 getComments(wine.id);
                                 addLike(wine.id);
                                 getNotes(wine.id);
+                            document.getElementById('nav-comments-tab').onclick = function (){
                                 delCom(wine.id);
+                            }
                         }
                     }
                 }
@@ -398,7 +402,8 @@ xhr.onload = function (){
                                     getTotalLike(wine.id);        
                                         getComments(wine.id);
                                         addLike(wine.id);
-                                        getNotes(wine.id);  
+                                        getNotes(wine.id);
+                                        document.querySelectorAll('#nav-tabContent p')  
                                         delCom(wine.id);  
                                 }
                             }
