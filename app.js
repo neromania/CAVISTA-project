@@ -167,12 +167,13 @@ function getComments(wineId){
         const doc = this.responseText;
         const data = JSON.parse(doc);
         for(let i = 0; i < data.length; i++){
-            comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em">'+data[i].content+'"</em></p>'; 
+            comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em>'+data[i].content+'</em> <button type="button" class="btn-close" disabled aria-label="Close"></button></em></p>'; 
         }
 
     };
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
     xhr.send();
+
 }
 function getNotes(wineId) {
     let notes = document.getElementById("nav-notes");
@@ -199,6 +200,7 @@ function delCom(wineId) {
     document.getElementById('nav-comments-tab').onclick = function (){
         let btnDel = document.querySelectorAll('#nav-tabContent p');
         for(let i of btnDel){
+            //console.log(i);
             i.onclick = function(){
                 const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
                 const options = {
@@ -217,7 +219,7 @@ function delCom(wineId) {
                             console.log(data);
                             if(data.success){
                                 i.innerHTML = "";
-                                $('#message').show().hide(5000);
+                                $('#message').show().hide(6000);
                             }
                         });
                     }
