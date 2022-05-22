@@ -96,9 +96,10 @@
             <li id="price"><strong>Price: </strong></li>
         </ul>
         <nav id="interactions">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#pictureModal" id="addImage">
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#pictureModal" id="addImage" onclick="document.getElementById('file-input').click();">
                 📷 Add a picture
               </button>
+            <input id="file-input" type="file" name="name" style="display: none" accept="image/*" >
             <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#commentModal" id="addComment">
                 ✎ Add a comment
               </button>

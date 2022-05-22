@@ -47,20 +47,6 @@ window.onload = function(){
     $("body > div").removeClass();
     }
 }
-function addPics(wineId,file) {
-        console.log("Uploading file...");
-      const API_ENDPOINT = "https://cruth.phpnet.org/epfc/caviste/public/index.php";
-      const request = new XMLHttpRequest();
-      const formData = new FormData();
-      request.open("POST", API_ENDPOINT+'/api/wines/'+wineId+'/pictures', true);
-      request.onreadystatechange = () => {if (request.readyState === 4 && request.status === 200) {
-        console.log(request.responseText);}};
-      formData.append("file", file);
-      request.setRequestHeader('Authorization','Basic ' +btoa(credentials));
-      request.send(formData);
-}
-
-
 function descriptionBottle(element) {
         const imgBottle = document.getElementsByTagName('img')[1];
         const nameTitle = document.getElementById("nameWine"); 
@@ -175,7 +161,7 @@ fetch(apiURL + fetchURL, options).then(function(response) {
 
 
 
-function getComments(wineId){
+/*function getComments(wineId){
     let comments = document.getElementById("nav-comments");
     const xhr = new XMLHttpRequest();
     comments.innerHTML = "";
@@ -183,15 +169,37 @@ function getComments(wineId){
         const doc = this.responseText;
         const data = JSON.parse(doc);
         for(let i = 0; i < data.length; i++){
-            comments.innerHTML += "<p id="+data[i].id+">user n° "+data[i].user_id+" -> <em>"+data[i].content+"</em> <button id="+data[i].id+" type='button' class='btn-close' disabled aria-label='Close'></button></p>"; 
+            comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em>'+data[i].content+'</em> <button onclick=\"delComB(wineId, data[i].id)\" type="button" class="btn-close" disabled aria-label="Close"></button></p>'; 
         }
-        delCom(wineId);
+
     };
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/comments',true);
     xhr.send();
 
+}*/
+function getComments(wineId) {
+    let comments = document.getElementById("nav-comments");
+    const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php';
+	const options = {
+        'method': 'get',
+        'mode': 'cors',
+        'headers': {
+            'content-type': 'application/json; charset=utf-8',
+            'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+        }
+    };
+    
+    const fetchURL = '/api/wines/'+wineId+'/comments';
+    fetch(apiURL + fetchURL, options).then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data){
+                //notes.innerHTML = '<p>'+data.note+'</p>';
+                comments.innerHTML += '<p id="'+data[i].id+'">user n° '+data[i].user_id+' -> <em>'+data[i].content+'</em></p>';  
+                comments.innerHTML += "<button onclick='delComB(wineId,data[i].id)'>X</button> ";
+            });
+        }
+    });
 }
-
 function getNotes(wineId) {
     let notes = document.getElementById("nav-notes");
     const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php';
@@ -213,7 +221,34 @@ function getNotes(wineId) {
         }
     });
 }
+function delComB(wineId, idCom) {
 
+            const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+            const options = {
+                'method': 'delete',
+                'mode': 'cors',
+                'headers': {
+                    'content-type': 'application/json; charset=utf-8',
+                    'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+                }
+            };
+            const fetchURL = '/wines/'+wineId+'/comments/'+idCom;
+            fetch(apiURL + fetchURL, options).then(function(response) {
+                if(response.ok) {
+                    response.json().then(function(data){
+                        console.log(data);
+                        if(data.success){
+                            i.innerHTML = "";
+                            $('#message').show().hide(6000);
+                            getComments(wineId);
+                        }
+                    });
+                }
+            });
+        }
+        
+
+/*
 function delCom(wineId) {
     if (document.querySelectorAll('#nav-tabContent p').length > 0) {
     let btnDel = document.querySelectorAll('#nav-tabContent p');
@@ -245,7 +280,7 @@ function delCom(wineId) {
         }
         }
 }
-}
+}*/
 function addLike(wineId) {
     const btnLike = document.getElementById('like');
     let options = {};
@@ -344,7 +379,10 @@ function getTotalLike(wineId){
     xhr.send();
 }
 
+
 const xhr = new XMLHttpRequest();
+
+
 xhr.onload = function (){
     const doc = this.responseText;
     const data = JSON.parse(doc);
@@ -370,6 +408,8 @@ xhr.onload = function (){
         countries.innerHTML += '<option>'+i+'</option>';
     }
 
+
+    
     for(let i of list){
         const liste = document.getElementById('liste');
         liste.innerHTML += '<li id="'+i.id+'">'+i.name+'</li>';
@@ -387,11 +427,9 @@ xhr.onload = function (){
                                 getComments(wine.id);
                                 addLike(wine.id);
                                 getNotes(wine.id);
-                                const fileInput = document.querySelector("#file-input");
-                                fileInput.addEventListener("change", event => 
-                                {const files = event.target.files;
-                                    addPics(wine.id,files[0]);
-                                });    
+                            /*document.getElementById('nav-comments-tab').onclick = function (){
+                                delCom(wine.id);
+                            }*/
                         }
                     }
                 }
@@ -416,6 +454,8 @@ xhr.onload = function (){
                                         getComments(wine.id);
                                         addLike(wine.id);
                                         getNotes(wine.id);
+                                        document.querySelectorAll('#nav-tabContent p')  
+                                        delCom(wine.id);  
                                 }
                             }
                             }
