@@ -24,7 +24,7 @@
         <h1 id="titre">Caviste</h1>
         <form action="#" method="get" id="filtre">
           <div class="form">
-              <input type="text" id="searchBar" placeholder="&#128270; Make a research here..." onKeyPress="if (event.keyCode == 13) btnSearch.onclick()">
+              <input type="text" id="searchBar"  autocomplete="off" placeholder="&#128270; Make a research here..." onKeyPress="if (event.keyCode == 13) btnSearch.onclick()">
               <button type="button" id="btnSearch">Search</button>
               <select name="countries" id="countries">
                  <option value="allCountries">All countries</option>
@@ -84,7 +84,26 @@
         </ul>
     </aside>
     <div id="bottle">
-        <img src="img/bartender.png" alt="bottle of wine" width="180" height="240"> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="img/bartender.png" alt="bottle of wine" width="180" height="240"> 
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-10" src="#" id="slide2" alt="Second slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-50" src="#" id="slide3" alt="third slide">
+              </div>
+            </div>
+          </div> 
     </div>
     <article class="descWines">
             <span id="idWine">#0</span><h3 id="nameWine">Vin</h3>
@@ -98,7 +117,7 @@
             <li id="price"><strong>Price: </strong></li>
         </ul>
         <nav id="interactions">
-            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#pictureModal" id="addImage" onclick="document.getElementById('file-input').click();">
+            <button type="button" class="btn btn-success" id="addImage" onclick="document.getElementById('file-input').click();">
                 📷 Add a picture
               </button>
             <input id="file-input" type="file" name="name" style="display: none" accept="image/*" >

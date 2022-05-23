@@ -2,6 +2,7 @@ const list = [];
 let credentials;
 let idCredentials;
 let barChart = null;
+
 //Formulaire de connexions
 window.onload = function(){
     //Recuperation des données de connexions
@@ -39,7 +40,7 @@ window.onload = function(){
         if(response.ok) {
             response.json().then(function(data){
                 idCredentials = data.id;
-                console.log(data.id);
+                //console.log(data.id);
             });
         }
     });
@@ -58,6 +59,8 @@ function addPics(wineId,file) {
       formData.append("file", file);
       request.setRequestHeader('Authorization','Basic ' +btoa(credentials));
       request.send(formData);
+
+
 }
 
 
@@ -131,7 +134,6 @@ function descriptionBottle(element) {
                     'content-type': 'application/json; charset=utf-8',
                     'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
                 } 
-                  
     };
     
     
@@ -331,6 +333,30 @@ function addLike(wineId) {
 }
 
 }
+function getPics(wineId) {
+	const apiURL = 'https://cruth.phpnet.org/epfc/caviste/public/index.php/api';
+	const options = {
+        'method': 'GET',
+        'mode': 'cors',
+        'headers': {
+            'content-type': 'application/json; charset=utf-8',
+            'Authorization': 'Basic '+btoa(credentials)	//Try with other credentials (login:password)
+        }
+    };
+    
+    const fetchURL = '/wines/'+wineId+'/pictures';
+    
+    fetch(apiURL + fetchURL, options).then(function(response) {
+        if(response.ok) {
+            response.json().then(function(data){
+                for(let i of data){
+                    document.querySelector("#slide2").src = 'https://cruth.phpnet.org/epfc/caviste/public/uploads/'+i.url;
+                    document.querySelector("#slide3").src = 'https://cruth.phpnet.org/epfc/caviste/public/uploads/'+i.url;
+            }
+            });
+        }
+    });
+}
 function getTotalLike(wineId){
     const likeCount = document.getElementById("likeCount");
 
@@ -343,6 +369,7 @@ function getTotalLike(wineId){
     xhr.open ('GET','https://cruth.phpnet.org/epfc/caviste/public/index.php/api/wines/'+wineId+'/likes-count',true);
     xhr.send();
 }
+
 
 const xhr = new XMLHttpRequest();
 xhr.onload = function (){
@@ -391,7 +418,10 @@ xhr.onload = function (){
                                 fileInput.addEventListener("change", event => 
                                 {const files = event.target.files;
                                     addPics(wine.id,files[0]);
-                                });    
+                                });
+                                if (credentials) {
+                                    getPics(wine.id)
+                                }    
                         }
                     }
                 }
@@ -406,7 +436,6 @@ xhr.onload = function (){
                         liste.innerHTML += '<li id="'+i.id+'">'+i.name+'</li>';
                     }
                     let items = document.querySelectorAll('li');
-
                     for(let item of items){ 
                         item.onclick = function () {
                             for(let wine of list){
@@ -416,6 +445,14 @@ xhr.onload = function (){
                                         getComments(wine.id);
                                         addLike(wine.id);
                                         getNotes(wine.id);
+                                        const fileInput = document.querySelector("#file-input");
+                                        fileInput.addEventListener("change", event => 
+                                        {const files = event.target.files;
+                                            addPics(wine.id,files[0]);
+                                        });   
+                                        if (credentials) {
+                                            getPics(wine.id)
+                                        }  
                                 }
                             }
                             }
