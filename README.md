@@ -11,7 +11,6 @@ Contraites :
 Composition du groupe :
 - Ismail T.
 - Serge B.
-- Ismail D.
 - Nassim J.
 
 Gestion de projet : https://trello.com/invite/cavisteproject/a245ed9e5ebafb175adae0d78ffa8d35
@@ -28,7 +27,6 @@ Constraints:
 Composition of the group:
 - Ismail T.
 - Serge B.
-- Ismail D.
 - Nassim J.
 
 Project management : https://trello.com/invite/cavisteproject/a245ed9e5ebafb175adae0d78ffa8d35
